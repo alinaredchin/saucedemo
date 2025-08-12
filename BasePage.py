@@ -1,6 +1,7 @@
 from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoAlertPresentException
 
 
 class BasePage:
@@ -69,3 +70,11 @@ class BasePage:
     def switch_to_a_new_tab(self):
         new_window = self.driver.window_handles[1]
         self.driver.switch_to.window(new_window)
+
+    def accept_alert(self):
+        WebDriverWait(self.driver, 5)
+        try:
+            alert = self.driver.switch_to.alert
+            alert.accept()
+        except NoAlertPresentException:
+            pass
