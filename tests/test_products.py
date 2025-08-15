@@ -117,7 +117,8 @@ class TestProducts:
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
         products_page.add_to_cart()
-        assert products_page.wait_for_text_to_be_present(products_page.Add_to_cart_locator, "Remove")
+        assert products_page.wait_for_text_to_be_present(
+            products_page.Add_to_cart_locator, "Remove")
 
     def test_cart_icon_when_products_added(self, driver):
         products_page = Products(driver)
