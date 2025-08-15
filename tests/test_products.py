@@ -3,13 +3,13 @@ from pages.ProductsPage import Products
 
 class TestProducts:
 
-    def test_side_menu_hidden_by_default(self, driver):
+    def test_side_menu_is_hidden_by_default(self, driver):
         products_page = Products(driver)
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
         assert products_page.is_menu_hidden()
 
-    def test_side_menu_items(self, driver):
+    def test_side_menu_items_names(self, driver):
         products_page = Products(driver)
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
@@ -112,7 +112,7 @@ class TestProducts:
         ) == actual_product_price_order, (
             f'Products not sorted L-H: {actual_product_price_order}')
 
-    def test_add_items_to_cart(self, driver):
+    def test_add_to_cart_button(self, driver):
         products_page = Products(driver)
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
@@ -120,7 +120,7 @@ class TestProducts:
         assert products_page.wait_for_text_to_be_present(
             products_page.Add_to_cart_locator, "Remove")
 
-    def test_cart_icon_when_products_added(self, driver):
+    def test_cart_icon_shows_number_of_products_added(self, driver):
         products_page = Products(driver)
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
