@@ -92,3 +92,11 @@ class BasePage:
             self.wait_until_element_is_not_visible(10, alert)
         except NoAlertPresentException:
             pass
+
+    def wait_for_text_to_be_present(self, locator, text):
+        wait = WebDriverWait(self.driver, 5)
+
+        try:
+            return wait.until(EC.text_to_be_present_in_element(locator, text))
+        except TimeoutException:
+            return False
