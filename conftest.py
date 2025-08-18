@@ -31,7 +31,7 @@ def pytest_html_report_title(report):
 @pytest.fixture
 def driver():
     options = Options()
-    options.add_argument("--headless=new")  # Use headless mode in CI
+    # options.add_argument("--headless=new")  # Use headless mode in CI
     options.add_argument("--no-sandbox")  # Needed in many CI environments
     options.add_argument("--disable-dev-shm-usage")  # Prevent shared memory
     # issues

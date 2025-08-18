@@ -112,7 +112,8 @@ class TestProducts:
         ) == actual_product_price_order, (
             f'Products not sorted L-H: {actual_product_price_order}')
 
-    def test_add_to_cart_button(self, driver):
+    def test_add_to_cart_button_is_replaced_by_remove_once_item_is_added(
+            self, driver):
         products_page = Products(driver)
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
@@ -126,3 +127,14 @@ class TestProducts:
         products_page.login("standard_user", "secret_sauce")
         products_page.add_to_cart()
         assert products_page.is_displayed(products_page.Cart_badge_locator)
+
+    def test_number_of_added_products_isnt_shown_on_cart_icon_if_items_are_removed(self, driver):
+        products_page = Products(driver)
+        products_page.open_the_link()
+        products_page.login("standard_user", "secret_sauce")
+        products_page.add_to_cart()
+        products_page.wait_for_text_to_be_present(
+            products_page.Add_to_cart_locator, "Remove")
+        products_page.add_to_cart()
+        assert products_page.wait_until_element_is_not_visible(
+            10, products_page.Cart_badge_locator)

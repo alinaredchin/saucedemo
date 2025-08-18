@@ -21,7 +21,8 @@ class Products(LoginPage):
     LH_filter_option_locator = (By.XPATH, "//option[@value='lohi']")
     HL_filter_option_locator = (By.XPATH, "//option[@value='hilo']")
     Products_price_locator = (By.XPATH, "//div[@class='inventory_item_price']")
-    Add_to_cart_locator = (By.XPATH, "//button[contains(@id,'sauce-labs-backpack')]")
+    Add_to_cart_locator = (
+        By.XPATH, "//button[contains(@id,'sauce-labs-backpack')]")
     Cart_badge_locator = (By.XPATH, "//span[@class='shopping_cart_badge']")
 
     def __init__(self, driver):
