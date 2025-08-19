@@ -21,3 +21,13 @@ class TestCartPage:
         cart_page.click(cart_page.Continue_shopping_button_locator)
         current_url = cart_page.get_current_url()
         assert current_url == "https://www.saucedemo.com/inventory.html"
+
+    def test_remove_btn_removes_product_from_the_cart(self, driver):
+        cart_page = Cart(driver)
+        cart_page.open_the_link()
+        cart_page.login("standard_user", "secret_sauce")
+        cart_page.add_to_cart()
+        cart_page.click(cart_page.Cart_badge_locator)
+        cart_page.is_displayed(cart_page.Cart_item_locator)
+        cart_page.click(cart_page.Remove_button_locator)
+        assert cart_page.verify_element_not_visible(cart_page.Cart_item_locator)
