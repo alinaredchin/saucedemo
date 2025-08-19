@@ -50,7 +50,10 @@ class BasePage:
 
     def wait_until_element_is_not_visible(self, time, locator):
         wait = WebDriverWait(self.driver, time)
-        return wait.until(EC.invisibility_of_element_located(locator))
+        try:
+            return wait.until(EC.invisibility_of_element_located(locator))
+        except (NoSuchElementException, TimeoutException):
+            return False
 
     @property
     def current_url(self) -> str:
