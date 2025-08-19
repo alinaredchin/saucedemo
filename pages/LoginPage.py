@@ -1,4 +1,4 @@
-from BasePage import BasePage
+from pages.BasePage import BasePage
 from selenium.webdriver.common.by import By
 
 expected_url = "https://www.saucedemo.com/inventory.html"

@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 from selenium.webdriver.chrome.service import Service as ChromeService
+import tempfile
 
 
 def pytest_addoption(parser):
@@ -12,20 +13,20 @@ def pytest_addoption(parser):
                      help="Run browser in headless mode")
 
 
-@pytest.hookimpl(tryfirst=True)
-def pytest_configure(config):
-    today = datetime.now()
-    report_dir = Path("reports", today.strftime("%Y-%m-%d"))
-    report_dir.mkdir(parents=True, exist_ok=True)
-    pytest_html = report_dir / (
-        f"Report_{today.strftime('%Y-%m-%d_%H-%M-%S')}.html"
-    )
-    config.option.htmlpath = pytest_html
-    config.option.self_contained_html = True
+# @pytest.hookimpl(tryfirst=True)
+# def pytest_configure(config):
+#     today = datetime.now()
+#     report_dir = Path("reports", today.strftime("%Y-%m-%d"))
+#     report_dir.mkdir(parents=True, exist_ok=True)
+#     pytest_html = report_dir / (
+#         f"Report_{today.strftime('%Y-%m-%d_%H-%M-%S')}.html"
+#     )
+#     config.option.htmlpath = pytest_html
+#     config.option.self_contained_html = True
 
 
-def pytest_html_report_title(report):
-    report.title = "Test Report"
+# def pytest_html_report_title(report):
+#     report.title = "Test Report"
 
 
 @pytest.fixture
@@ -36,6 +37,7 @@ def driver():
     options.add_argument("--disable-dev-shm-usage")  # Prevent shared memory
     # issues
     options.add_argument("--window-size=1920,1080")
+    options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
     service = ChromeService(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     driver.implicitly_wait(5)
