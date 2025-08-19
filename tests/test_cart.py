@@ -20,4 +20,4 @@ class TestCartPage:
         cart_page.is_displayed(cart_page.Cart_item_locator)
         cart_page.click(cart_page.Continue_shopping_button_locator)
         current_url = cart_page.get_current_url()
-        assert current_url == "https://www.saucedemo.com/inventory.htm"
+        assert current_url == "https://www.saucedemo.com/inventory.html"
