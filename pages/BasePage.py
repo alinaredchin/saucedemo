@@ -14,17 +14,11 @@ class BasePage:
 
     def find(self, locator):
         self.wait_until_element_is_visible(10, locator)
-        try:
-            return self.driver.find_element(*locator)
-        except (NoSuchElementException, TimeoutException):
-            return False
+        return self.driver.find_element(*locator)
 
     def find_all(self, locator):
         self.wait_until_all_elements_are_visible(10, locator)
-        try:
-            return self.driver.find_elements(*locator)
-        except (NoSuchElementException, TimeoutException):
-            return False
+        return self.driver.find_elements(*locator)
 
     def enter(self, locator, text: str):
         self.find(locator).send_keys(text)
@@ -69,7 +63,8 @@ class BasePage:
 
     def is_displayed(self, locator) -> bool:
         try:
-            return self.find(locator).is_displayed()
+            element = self.find(locator)
+            return element.is_displayed() if element else False
         except (NoSuchElementException, TimeoutException):
             return False
 
