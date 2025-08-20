@@ -31,9 +31,7 @@ class BasePage:
             return False
 
     def click(self, locator):
-        self.wait_until_element_is_visible(10, locator)
-        self.wait_until_element_is_clickable(10, locator)
-        self.find(locator).click()
+        self.wait_until_element_is_clickable(10, locator).click()
 
     def wait_until_element_is_visible(self, time, locator):
         wait = WebDriverWait(self.driver, time)
