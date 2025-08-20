@@ -38,7 +38,6 @@ class TestCartPage:
         cart_page.login("standard_user", "secret_sauce")
         cart_page.add_to_cart()
         cart_page.go_to_cart()
-        cart_page.is_displayed(cart_page.Cart_item_locator)
         cart_page.open_product_details()
         assert cart_page.is_displayed(cart_page.Product_details_container_locator)
 
@@ -48,7 +47,5 @@ class TestCartPage:
         cart_page.login("standard_user", "secret_sauce")
         cart_page.add_to_cart()
         cart_page.go_to_cart()
-        cart_page.is_displayed(cart_page.Cart_item_locator)
         cart_page.go_to_checkout()
         assert cart_page.current_url == "https://www.saucedemo.com/checkout-step-one.html"
-

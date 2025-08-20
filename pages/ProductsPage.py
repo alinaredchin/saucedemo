@@ -38,7 +38,6 @@ class Products(LoginPage):
     def expand_menu(self):
         self.accept_alert()
         self.click(self.OpenMenuBtn_locator)
-        return self.find_all(self.Menu_items)
 
     def get_menu_items(self):
         items = self.find_all(self.Menu_items)
