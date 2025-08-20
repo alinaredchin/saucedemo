@@ -14,9 +14,6 @@ class Cart(Products):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def accept_alert(self):
-        super().accept_alert()
-
     def add_to_cart(self):
         super().add_to_cart()
 
