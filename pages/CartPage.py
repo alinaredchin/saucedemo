@@ -9,6 +9,7 @@ class Cart(Products):
     Remove_button_locator = (By.XPATH, "//button[contains(@id,'remove')]")
     Item_name_locator = (By.XPATH, "//a[@id='item_4_title_link']")
     Product_details_container_locator = (By.XPATH, "//div[@class='inventory_details_container']")
+    Checkout_button_locator = (By.XPATH, "//button[@id='checkout']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -27,3 +28,6 @@ class Cart(Products):
 
     def open_product_details(self):
         self.click(self.Item_name_locator)
+
+    def go_to_checkout(self):
+        self.click(self.Checkout_button_locator)
