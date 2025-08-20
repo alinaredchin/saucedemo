@@ -47,7 +47,8 @@ class BasePage:
 
     def click(self, locator, timeout=10):
         try:
-            element = WebDriverWait(self.driver, timeout).until(
+            element = self.find(locator, timeout)
+            WebDriverWait(self.driver, timeout).until(
                 EC.element_to_be_clickable(locator)
             )
             element.click()
