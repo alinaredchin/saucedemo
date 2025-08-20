@@ -112,7 +112,8 @@ class TestProducts:
         ) == actual_product_price_order, (
             f'Products not sorted L-H: {actual_product_price_order}')
 
-    def test_add_to_cart_button_changes_to_remove_once_item_is_added(self, driver):
+    def test_add_to_cart_button_is_replaced_by_remove_once_item_is_added(
+            self, driver):
         products_page = Products(driver)
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
