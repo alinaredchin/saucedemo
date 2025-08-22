@@ -16,7 +16,16 @@ class BasePage:
     # FIND METHODS
     # --------------------
 
-    def find(self, locator, timeout=10):
+    def find_present(self, locator, timeout=10):
+        """Wait until element is visible and return it."""
+        try:
+            return WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_element_located(locator)
+            )
+        except TimeoutException:
+            return None
+
+    def find_visible(self, locator, timeout=10):
         """Wait until element is visible and return it."""
         try:
             return WebDriverWait(self.driver, timeout).until(
@@ -39,7 +48,7 @@ class BasePage:
     # --------------------
 
     def enter(self, locator, text: str, timeout=10):
-        element = self.find(locator, timeout)
+        element = self.find_present(locator, timeout)
         if not element:
             raise Exception(f"Cannot enter text, element not found: {locator}")
         element.clear()
@@ -47,24 +56,29 @@ class BasePage:
 
     def click(self, locator, timeout=10):
         try:
-            element = self.find(locator, timeout)
+            # wait until visible
             WebDriverWait(self.driver, timeout).until(
-                EC.element_to_be_clickable(locator)
+                EC.visibility_of_element_located(locator)
             )
+            # wait until clickable
+            element = self.is_clickable(locator)
             element.click()
         except TimeoutException:
             raise Exception(f"Element not clickable: {locator}")
 
     def get_text(self, locator, timeout=10):
-        element = self.find(locator, timeout)
+        element = self.find_visible(locator, timeout)
         return element.text if element else ""
+
+    def return_to_previous_page(self):
+        self.driver.back()
 
     # --------------------
     # CHECK METHODS
     # --------------------
 
     def is_displayed(self, locator, timeout=5) -> bool:
-        element = self.find(locator, timeout)
+        element = self.find_visible(locator, timeout)
         return element.is_displayed() if element else False
 
     def is_clickable(self, locator):

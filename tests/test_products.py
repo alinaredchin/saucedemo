@@ -46,7 +46,7 @@ class TestProducts:
         products_page.open_the_link()
         products_page.login("standard_user", "secret_sauce")
         products_page.expand_filters()
-        selected_filter = products_page.find(
+        selected_filter = products_page.find_visible(
             products_page.Selected_filter_option)
         assert selected_filter.text == "Name (A to Z)"
 
