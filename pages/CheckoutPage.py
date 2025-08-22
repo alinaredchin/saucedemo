@@ -9,7 +9,7 @@ class Checkout(Cart):
     Last_name_locator = (By.XPATH, "//input[@id='last-name']")
     Postal_code_locator = (By.XPATH, "//input[@id='postal-code']")
     Continue_button_locator = (By.XPATH, "//input[@id='continue']")
-    Cancel_button_locator = (By.XPATH, "//input[@id='cancel']")
+    Cancel_button_locator = (By.XPATH, "//button[@id='cancel']")
     Error_message_locator = (By.XPATH, "//div[contains(@class,'error-message')]")
 
     def __init__(self, driver):

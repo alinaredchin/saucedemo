@@ -53,3 +53,15 @@ class TestCheckoutPage:
         checkout_page.click_continue()
         error_message = checkout_page.find(checkout_page.Error_message_locator)
         assert error_message.text == "Error: Postal Code is required"
+
+    def test_click_cancel_without_filling_in_the_checkout_form(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.click_cancel()
+        cart_url = "https://www.saucedemo.com/cart.html"
+        assert checkout_page.current_url == cart_url
