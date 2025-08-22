@@ -29,7 +29,7 @@ class TestCartPage:
         cart_page.add_to_cart()
         cart_page.go_to_cart()
         cart_page.is_displayed(cart_page.Cart_item_locator)
-        cart_page.click(cart_page.Remove_button_locator)
+        cart_page.remove_item()
         assert cart_page.verify_element_not_visible(cart_page.Cart_item_locator)
 
     def test_clicking_on_the_item_name_shows_product_details(self, driver):
@@ -40,6 +40,17 @@ class TestCartPage:
         cart_page.go_to_cart()
         cart_page.open_product_details()
         assert cart_page.is_displayed(cart_page.Product_details_container_locator)
+
+    def test_clicking_back_to_products_btn_redirects_to_products_list(self, driver):
+        cart_page = Cart(driver)
+        cart_page.open_the_link()
+        cart_page.login("standard_user", "secret_sauce")
+        cart_page.add_to_cart()
+        cart_page.go_to_cart()
+        cart_page.open_product_details()
+        cart_page.click_back_to_products()
+        current_url = cart_page.get_current_url()
+        assert current_url == "https://www.saucedemo.com/inventory.html"
 
     def test_clicking_checkout_redirects_to_checkout_page(self, driver):
         cart_page = Cart(driver)

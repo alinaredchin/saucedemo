@@ -33,7 +33,7 @@ class Products(LoginPage):
 
     def is_menu_hidden(self):
         self.accept_alert()
-        return self.find(self.Closed_Menu_locator)
+        return self.find_visible(self.Closed_Menu_locator)
 
     def expand_menu(self):
         self.accept_alert()
