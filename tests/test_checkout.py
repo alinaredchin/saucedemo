@@ -76,3 +76,14 @@ class TestCheckoutPage:
 
         checkout_page.return_to_previous_page()
         assert checkout_page.current_url == "https://www.saucedemo.com/cart.html"
+
+    def test_clicking_on_the_cart_badge_from_the_checkout_form_redirects_to_the_cart(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.click_on_the_cart_icon()
+        assert checkout_page.current_url == "https://www.saucedemo.com/cart.html"
