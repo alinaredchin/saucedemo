@@ -27,4 +27,5 @@ class Checkout(Cart):
         self.click(self.Cancel_button_locator)
 
     def click_on_the_cart_icon(self):
+        self.find_present(self.Cart_badge_locator)
         self.click(self.Cart_badge_locator)

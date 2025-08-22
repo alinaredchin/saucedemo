@@ -27,4 +27,5 @@ class Cart(Products):
         self.click(self.Item_name_locator)
 
     def go_to_checkout(self):
+        self.find_present(self.Checkout_button_locator)
         self.click(self.Checkout_button_locator)

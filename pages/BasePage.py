@@ -17,7 +17,7 @@ class BasePage:
     # --------------------
 
     def find_present(self, locator, timeout=10):
-        """Wait until element is visible and return it."""
+        """Wait until element is present and return it."""
         try:
             return WebDriverWait(self.driver, timeout).until(
                 EC.presence_of_element_located(locator)
@@ -56,12 +56,14 @@ class BasePage:
 
     def click(self, locator, timeout=10):
         try:
-            # wait until visible
+            # wait until present
             WebDriverWait(self.driver, timeout).until(
-                EC.visibility_of_element_located(locator)
+                EC.presence_of_element_located(locator)
             )
             # wait until clickable
-            element = self.is_clickable(locator)
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.element_to_be_clickable(locator)
+            )
             element.click()
         except TimeoutException:
             raise Exception(f"Element not clickable: {locator}")
