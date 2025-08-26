@@ -13,6 +13,7 @@ class Checkout(Cart):
     Error_message_locator = (By.XPATH, "//div[contains(@class,'error-message')]")
     Finish_button_locator = (By.XPATH, "//button[@name='finish']")
     Checkout_complete_container_locator = (By.XPATH, "//div[@id='checkout_complete_container']")
+    Back_home_button_locator = (By.XPATH, "//button[@id='back-to-products']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -34,3 +35,6 @@ class Checkout(Cart):
 
     def finish_checkout(self):
         self.click(self.Finish_button_locator)
+
+    def go_back_to_home_page(self):
+        self.click(self.Back_home_button_locator)

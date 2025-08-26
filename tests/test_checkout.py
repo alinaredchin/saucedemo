@@ -167,3 +167,17 @@ class TestCheckoutPage:
         checkout_page.click_continue()
         checkout_page.finish_checkout()
         assert checkout_page.is_displayed(checkout_page.Checkout_complete_container_locator)
+
+    def test_back_home_btn_redirects_to_the_homepage(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.fill_in_the_form("Test", "Test", "12345")
+        checkout_page.click_continue()
+        checkout_page.finish_checkout()
+        checkout_page.go_back_to_home_page()
+        assert checkout_page.current_url == "https://www.saucedemo.com/inventory.html"
