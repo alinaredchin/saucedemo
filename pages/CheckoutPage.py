@@ -12,6 +12,7 @@ class Checkout(Cart):
     Cancel_button_locator = (By.XPATH, "//button[@id='cancel']")
     Error_message_locator = (By.XPATH, "//div[contains(@class,'error-message')]")
     Finish_button_locator = (By.XPATH, "//button[@name='finish']")
+    Checkout_complete_container_locator = (By.XPATH, "//div[@id='checkout_complete_container']")
 
     def __init__(self, driver):
         super().__init__(driver)
