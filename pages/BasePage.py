@@ -58,7 +58,7 @@ class BasePage:
         try:
             # wait until present
             WebDriverWait(self.driver, timeout).until(
-                EC.presence_of_element_located(locator)
+                EC.visibility_of_element_located(locator)
             )
             # wait until clickable
             element = WebDriverWait(self.driver, timeout).until(

@@ -88,7 +88,7 @@ class TestCheckoutPage:
         checkout_page.click_on_the_cart_icon()
         assert checkout_page.current_url == "https://www.saucedemo.com/cart.html"
 
-    def test_click_cancel_from_the_second_checkout_step_redirects_to_products_list(self, driver):
+    def test_click_cancel_from_the_overview_page_redirects_to_products_list(self, driver):
         checkout_page = Checkout(driver)
         checkout_page.open_the_link()
         checkout_page.login("standard_user", "secret_sauce")
@@ -141,3 +141,43 @@ class TestCheckoutPage:
         checkout_page.open_product_details()
         checkout_page.remove_item()
         assert checkout_page.verify_element_not_visible(checkout_page.Remove_button_locator)
+
+    def test_clicking_finish_completes_checkout(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.fill_in_the_form("Test", "Test", "12345")
+        checkout_page.click_continue()
+        checkout_page.finish_checkout()
+        assert checkout_page.current_url == "https://www.saucedemo.com/checkout-complete.html"
+
+    def test_checkout_complete_container_is_displayed_after_finishing_checkout(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.fill_in_the_form("Test", "Test", "12345")
+        checkout_page.click_continue()
+        checkout_page.finish_checkout()
+        assert checkout_page.is_displayed(checkout_page.Checkout_complete_container_locator)
+
+    def test_back_home_btn_redirects_to_the_homepage(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.fill_in_the_form("Test", "Test", "12345")
+        checkout_page.click_continue()
+        checkout_page.finish_checkout()
+        checkout_page.go_back_to_home_page()
+        assert checkout_page.current_url == "https://www.saucedemo.com/inventory.html"
