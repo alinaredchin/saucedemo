@@ -141,3 +141,16 @@ class TestCheckoutPage:
         checkout_page.open_product_details()
         checkout_page.remove_item()
         assert checkout_page.verify_element_not_visible(checkout_page.Remove_button_locator)
+    def test_clicking_finish_completes_checkout(self, driver):
+        checkout_page = Checkout(driver)
+        checkout_page.open_the_link()
+        checkout_page.login("standard_user", "secret_sauce")
+        checkout_page.add_to_cart()
+        checkout_page.go_to_cart()
+        checkout_page.go_to_checkout()
+
+        checkout_page.fill_in_the_form("Test", "Test", "12345")
+        checkout_page.click_continue()
+        checkout_page.finish_checkout()
+        assert checkout_page.current_url == "https://www.saucedemo.com/checkout-complete.html"
+

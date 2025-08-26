@@ -11,6 +11,7 @@ class Checkout(Cart):
     Continue_button_locator = (By.XPATH, "//input[@id='continue']")
     Cancel_button_locator = (By.XPATH, "//button[@id='cancel']")
     Error_message_locator = (By.XPATH, "//div[contains(@class,'error-message')]")
+    Finish_button_locator = (By.XPATH, "//button[@name='finish']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -29,3 +30,6 @@ class Checkout(Cart):
     def click_on_the_cart_icon(self):
         self.find_present(self.Cart_badge_locator)
         self.click(self.Cart_badge_locator)
+
+    def finish_checkout(self):
+        self.click(self.Finish_button_locator)
